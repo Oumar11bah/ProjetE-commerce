@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini E-commerce</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header principal façon Alibaba -->
+  <header class="header-alibaba">
+    <div class="header-left">
+      <!-- Logo -->
+      <img src="assets/images/Produits/L1.jpg" alt="logo" class="logo-img">
+      <span class="logo-text"> Hyper<small>Vente Guinée</small></span>
+    </div>
+    <!-- Barre de recherche centrale -->
+    <form class="search-bar" id="search-form">
+      <input type="text" id="search-input" placeholder="Rechercher un produit, une marque...">
+      <button type="submit">🔍</button>
+    </form>
+    <!-- Icônes à droite -->
+    <div class="header-right">
+      <a href="#" data-view="cart" class="icon-link"><span id="cart-count">0</span> 🛒</a>
+      <a href="#" class="icon-link">👤</a>
+    </div>
+  </header>
+  <!-- Menu catégories horizontal -->
+  <nav class="categories-nav">
+    <!-- Catégories injectées dynamiquement par JS -->
+  </nav>
+  <!-- Contenu principal -->
+  <main id="main-content">
+    <!-- Sections dynamiques injectées ici par JS -->
+  </main>
+  <script src="app.js" type="module"></script>
+</body>
+</html> 

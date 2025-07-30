@@ -1,0 +1,624 @@
+/* ========== Reset & Base ========== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f6f6f6;
+  color: #222;
+}
+
+/* ========== Header façon Alibaba ========== */
+.header-alibaba {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 1em 2em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.logo-img {
+  height: 40px;
+}
+.logo-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ff6a00;
+}
+.search-bar {
+  flex: 1;
+  display: flex;
+  max-width: 500px;
+  margin: 0 2em;
+  background: #f2f2f2;
+  border-radius: 2em;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+.search-bar input {
+  flex: 1;
+  border: none;
+  padding: 0.7em 1em;
+  font-size: 1em;
+  background: transparent;
+  outline: none;
+}
+.search-bar button {
+  background: #ff6a00;
+  color: #fff;
+  border: none;
+  padding: 0 1.5em;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.search-bar button:hover {
+  background: #e65c00;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+.icon-link {
+  color: #222;
+  text-decoration: none;
+  font-size: 1.3em;
+  position: relative;
+}
+#cart-count {
+  background: #ff6a00;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0.1em 0.5em;
+  font-size: 0.9em;
+  position: relative;
+  top: -0.5em;
+  left: -0.3em;
+}
+
+/* ========== Menu Catégories Horizontal ========== */
+.categories-nav {
+  display: flex;
+  gap: 2em;
+  background: #fff;
+  padding: 0.7em 2em;
+  border-bottom: 1px solid #eee;
+  overflow-x: auto;
+  position: sticky;
+  top: 64px; /* hauteur du header (40px + padding) */
+  z-index: 9;
+}
+.category-link {
+  color: #ff6a00;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.3em 1em;
+  border-radius: 1em;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.category-link:hover, .category-link.active {
+  background: #ff6a00;
+  color: #fff;
+}
+
+/* ========== Grille de Produits façon Alibaba ========== */
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2em;
+  margin: 2em 0;
+}
+.product-card {
+  background: #fff;
+  border-radius: 1em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 1.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+.product-card:hover {
+  box-shadow: 0 6px 24px rgba(255,106,0,0.13);
+  transform: translateY(-4px) scale(1.03);
+}
+.product-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 0.7em;
+  margin-bottom: 1em;
+}
+.product-card h3 {
+  margin: 0.3em 0 0.2em 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+}
+.product-card p {
+  font-size: 0.97em;
+  color: #666;
+  text-align: center;
+  margin: 0.2em 0 0.7em 0;
+}
+.price-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2em;
+  margin-bottom: 0.7em;
+}
+.price {
+  color: #ff6a00;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.rating {
+  color: #f7b500;
+  font-size: 1em;
+}
+.add-cart-btn {
+  background: #ff6a00;
+  color: #fff;
+  border: none;
+  border-radius: 1.5em;
+  padding: 0.6em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: background 0.2s;
+}
+.add-cart-btn:hover {
+  background: #e65c00;
+}
+
+/* ========== Panier ========== */
+.cart-list {
+  background: #fff;
+  border-radius: 1em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 1.5em;
+  margin: 2em 0;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7em 0;
+  border-bottom: 1px solid #eee;
+}
+.cart-item:last-child {
+  border-bottom: none;
+}
+.cart-total {
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ff6a00;
+  margin-top: 1.2em;
+}
+.remove-cart-btn {
+  background: #eee;
+  color: #ff6a00;
+  border: none;
+  border-radius: 1em;
+  padding: 0.3em 1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.remove-cart-btn:hover {
+  background: #ff6a00;
+  color: #fff;
+}
+
+/* ========== Barre de navigation principale façon Alibaba ========== */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 0.7em 0;
+  font-size: 1.08em;
+  position: sticky;
+  top: 70px; /* sous le header */
+  z-index: 9;
+}
+.main-nav-link {
+  color: #222;
+  text-decoration: none;
+  padding: 0.4em 1.3em;
+  border-radius: 1.5em;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.main-nav-link:hover {
+  background: #ff6a00;
+  color: #fff;
+}
+.main-nav-link.active {
+  background: #ff6a00;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(255,106,0,0.08);
+}
+
+/* ========== Carrousel d'accueil amélioré ========== */
+.carousel-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #0a2a47;
+  padding: 2.5em 0 1.2em 0;
+}
+.carousel-container {
+  position: relative;
+  width: 700px;
+  max-width: 95vw;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 1.2em;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  background: #fff;
+}
+.carousel-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 1.2em;
+  transition: opacity 0.7s, transform 0.7s;
+}
+.carousel-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(255,106,0,0.13);
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(10,42,71,0.7);
+  color: #fff;
+  border: none;
+  font-size: 2em;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s;
+}
+.carousel-btn:hover {
+  background: #ff6a00;
+}
+.carousel-btn.prev {
+  left: 10px;
+}
+.carousel-btn.next {
+  right: 10px;
+}
+.carousel-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6em;
+}
+.carousel-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #eee;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.carousel-dot.active {
+  background: #ff6a00;
+  transform: scale(1.2);
+}
+
+@media (max-width: 800px) {
+  .carousel-container, .carousel-img {
+    height: 160px;
+  }
+}
+@media (max-width: 500px) {
+  .carousel-container, .carousel-img {
+    height: 90px;
+  }
+}
+
+/* ========== Bannière promo améliorée ========== */
+.improved-banner {
+  background: linear-gradient(90deg, #0a2a47 60%, #ff6a00 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2.5em 1em 2em 1em;
+  margin-top: 1.5em;
+  border-radius: 1.2em;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  position: relative;
+}
+.improved-banner .promo {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 0.2em;
+}
+.improved-banner .promo-desc {
+  font-size: 1.2em;
+  margin-bottom: 1.2em;
+}
+.improved-banner .banner-btn {
+  background: #fff;
+  color: #ff6a00;
+  border: none;
+  border-radius: 2em;
+  padding: 0.7em 2.2em;
+  font-size: 1.1em;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255,106,0,0.10);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.improved-banner .banner-btn:hover {
+  background: #ff6a00;
+  color: #fff;
+}
+
+/* ========== Avantages améliorés ========== */
+.improved-advantages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5em;
+  margin: 2.5em 0 2em 0;
+  justify-items: center;
+}
+.adv-card {
+  background: #fff;
+  border-radius: 1.2em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 1.2em 0.7em;
+  text-align: center;
+  font-size: 1.1em;
+  color: #0a2a47;
+  min-width: 120px;
+  max-width: 200px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+.adv-card span {
+  font-size: 2em;
+  margin-bottom: 0.2em;
+}
+
+/* ========== Produits en vedette améliorés ========== */
+.improved-featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.2em;
+  margin: 2.5em 0 2em 0;
+}
+.improved-product {
+  box-shadow: 0 4px 18px rgba(10,42,71,0.10);
+  border-radius: 1.2em;
+  padding: 1.5em 1em 1.2em 1em;
+  background: #fff;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+.improved-product:hover {
+  box-shadow: 0 8px 32px rgba(255,106,0,0.13);
+  transform: translateY(-4px) scale(1.03);
+}
+.improved-product img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 0.8em;
+  margin-bottom: 1em;
+}
+.improved-order-btn {
+  background: #ff6a00;
+  color: #fff;
+  border: none;
+  border-radius: 1.5em;
+  padding: 0.7em 2em;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.7em;
+  box-shadow: 0 2px 8px rgba(255,106,0,0.10);
+  transition: background 0.2s;
+}
+.improved-order-btn:hover {
+  background: #0a2a47;
+  color: #fff;
+}
+
+/* ========== Boutons produits alignés et compacts ========== */
+.product-btns, .home-product-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+.improved-order-btn, .improved-add-btn {
+  font-size: 0.95em;
+  padding: 0.45em 1.1em;
+  border-radius: 1.2em;
+  min-width: 110px;
+  max-width: 140px;
+  height: 2.2em;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.improved-add-btn {
+  margin-left: 0.2em;
+  background: #fff;
+  color: #ff6a00;
+  border: 1.5px solid #ff6a00;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.improved-add-btn:hover {
+  background: #ff6a00;
+  color: #fff;
+}
+.improved-order-btn {
+  background: #ff6a00;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.improved-order-btn:hover {
+  background: #0a2a47;
+  color: #fff;
+}
+
+/* ========== Bouton Commander dans le panier ========== */
+.order-btn {
+  background: #ff6a00;
+  color: #fff;
+  border: none;
+  border-radius: 2em;
+  padding: 0.9em 2.5em;
+  font-size: 1.15em;
+  font-weight: bold;
+  margin-top: 1.5em;
+  box-shadow: 0 2px 12px rgba(255,106,0,0.13);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  transition: background 0.2s, color 0.2s;
+}
+.order-btn:hover {
+  background: #0a2a47;
+  color: #fff;
+}
+.order-btn .order-icon {
+  font-size: 1.2em;
+}
+
+/* ========== Bouton Retour après commande ========== */
+.home-btn, .back-btn {
+  background: #0a2a47;
+  color: #fff;
+  border: none;
+  border-radius: 2em;
+  padding: 0.7em 2em;
+  font-size: 1.08em;
+  font-weight: 500;
+  margin-top: 1.5em;
+  box-shadow: 0 2px 8px rgba(10,42,71,0.10);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  transition: background 0.2s, color 0.2s;
+}
+.home-btn:hover, .back-btn:hover {
+  background: #ff6a00;
+  color: #fff;
+}
+.back-btn .back-icon {
+  font-size: 1.1em;
+}
+
+/* ========== Barre de filtres améliorée ========== */
+#filter-bar {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(10,42,71,0.07);
+  border-radius: 1.2em;
+  padding: 1em 2em;
+  margin: 1.2em auto 1.5em auto;
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 1100px;
+}
+#filter-bar label {
+  font-weight: 500;
+  color: #0a2a47;
+  font-size: 1.05em;
+}
+#filter-bar select {
+  margin-left: 0.5em;
+  padding: 0.4em 1.2em 0.4em 0.7em;
+  border-radius: 1em;
+  border: 1.5px solid #eee;
+  font-size: 1em;
+  background: #f6f6f6;
+  color: #222;
+  transition: border 0.2s;
+}
+#filter-bar select:focus {
+  border: 1.5px solid #ff6a00;
+  outline: none;
+}
+@media (max-width: 700px) {
+  #filter-bar {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em 0.7em;
+  }
+}
+
+/* ========== Espacements généraux ========== */
+.home-banner-materiel, .home-advantages-materiel, .home-featured-products {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1100px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .header-alibaba, .categories-nav {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .search-bar {
+    margin: 0 1em;
+  }
+}
+@media (max-width: 700px) {
+  .header-alibaba {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1em;
+    padding: 1em 0.5em;
+  }
+  .categories-nav {
+    gap: 1em;
+    padding: 0.5em 0.5em;
+  }
+  .products-list {
+    gap: 1em;
+  }
+  .main-nav {
+    gap: 0.7em;
+    font-size: 0.98em;
+    padding: 0.5em 0;
+  }
+  .main-nav-link {
+    padding: 0.3em 0.7em;
+  }
+} 
