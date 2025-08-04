@@ -448,71 +448,43 @@ function showCart() {
   
   main.innerHTML = `
     <div class="cart-container">
-      <div class="cart-header">
-        <h2>🛒 Mon Panier</h2>
-        <span class="cart-items-count">${cart.length} article${cart.length > 1 ? 's' : ''}</span>
+      <h2 class="cart-title">Votre Panier</h2>
+      
+      <div class="cart-items-container">
+        ${cart.map(item => {
+          const product = products.find(p => p.id === item.id);
+          return `
+            <div class='cart-item-row'>
+              <div class='cart-item-image'>
+                <img src="${product ? product.image : 'assets/images/Produits/p1.jpg'}" alt="${item.name}">
+              </div>
+              <div class='cart-item-info'>
+                <h3 class='cart-item-name'>${item.name}</h3>
+                <p class='cart-item-price'>${item.price.toFixed(2)} €</p>
+              </div>
+              <div class='cart-item-quantity'>
+                <button class='qty-btn decrease' data-id='${item.id}' data-action='decrease'>-</button>
+        <span class='qty-value'>${item.qty}</span>
+                <button class='qty-btn increase' data-id='${item.id}' data-action='increase'>+</button>
+              </div>
+              <div class='cart-item-total'>
+                <span class='total-price'>Total: ${(item.price * item.qty).toFixed(2)} €</span>
+              </div>
+              <button data-id='${item.id}' class='remove-cart-btn'>
+                🗑️
+              </button>
+            </div>
+          `;
+        }).join('')}
       </div>
       
-      <div class="cart-content">
-        <div class="cart-items">
-          ${cart.map(item => {
-            const product = products.find(p => p.id === item.id);
-            return `
-              <div class='cart-item-card'>
-                <div class='cart-item-image'>
-                  <img src="${product ? product.image : 'assets/images/Produits/p1.jpg'}" alt="${item.name}">
-                </div>
-                <div class='cart-item-details'>
-                  <h3 class='cart-item-name'>${item.name}</h3>
-                  <p class='cart-item-price'>$${item.price.toFixed(2)}</p>
-                  <div class='cart-item-rating'>
-                    ${product ? '⭐'.repeat(Math.floor(product.rating)) : ''} ${product ? product.rating : ''}
-                  </div>
-                </div>
-                <div class='cart-item-controls'>
-                  <div class='cart-qty-controls'>
-                    <button class='qty-btn decrease' data-id='${item.id}' data-action='decrease'>−</button>
-                    <span class='qty-value'>${item.qty}</span>
-                    <button class='qty-btn increase' data-id='${item.id}' data-action='increase'>+</button>
-                  </div>
-                  <div class='cart-item-total'>
-                    <span class='total-price'>$${(item.price * item.qty).toFixed(2)}</span>
-                  </div>
-                </div>
-                <button data-id='${item.id}' class='remove-cart-btn'>
-                  <span>🗑️</span>
-                </button>
-              </div>
-            `;
-          }).join('')}
-        </div>
-        
-        <div class="cart-summary">
-          <div class="summary-header">
-            <h3>📋 Résumé de la commande</h3>
-          </div>
-          <div class="summary-details">
-            <div class="summary-row">
-              <span>Sous-total</span>
-              <span>$${cart.reduce((sum, item) => sum + item.price * item.qty, 0).toFixed(2)}</span>
-            </div>
-            <div class="summary-row">
-              <span>Livraison</span>
-              <span class="free-shipping">Gratuite</span>
-            </div>
-            <div class="summary-row total-row">
-              <span>Total</span>
-              <span class="total-amount">$${cart.reduce((sum, item) => sum + item.price * item.qty, 0).toFixed(2)}</span>
-            </div>
-          </div>
-          <button class='order-btn' onclick="showOrderForm()">
-            <span class='order-icon'>💳</span> 
-            Commander maintenant
-          </button>
-          <button class='continue-shopping-btn' onclick="showProducts(0)">
-            <span>🛍️</span> Continuer les achats
-          </button>
-        </div>
+      <div class="cart-actions">
+        <button class='continue-shopping-btn' onclick="showProducts(0)">
+          Continuer mes achats
+        </button>
+        <button class='order-btn'>
+          Commander
+        </button>
       </div>
     </div>
   `;
@@ -543,129 +515,24 @@ function showCart() {
       }
     });
   });
-}
-
-// Fonction pour afficher le formulaire de commande
-function showOrderForm() {
-  const main = document.getElementById("main-content");
-  main.innerHTML = `
-    <div class="order-form-container">
-      <h2>📝 Informations de commande</h2>
-      <form class="order-form" id="orderForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">Prénom *</label>
-            <input type="text" id="firstName" name="firstName" required>
-          </div>
-          <div class="form-group">
-            <label for="lastName">Nom *</label>
-            <input type="text" id="lastName" name="lastName" required>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="phone">Téléphone *</label>
-          <input type="tel" id="phone" name="phone" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="address">Adresse de livraison *</label>
-          <textarea id="address" name="address" rows="3" required></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label for="city">Ville *</label>
-          <input type="text" id="city" name="city" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="paymentMethod">Méthode de paiement *</label>
-          <select id="paymentMethod" name="paymentMethod" required>
-            <option value="">Choisissez une méthode</option>
-            <option value="card">Carte bancaire</option>
-            <option value="mobile">Mobile Money</option>
-            <option value="cash">Paiement à la livraison</option>
-          </select>
-        </div>
-        
-        <div class="order-summary">
-          <h3>Récapitulatif de votre commande</h3>
-          <div class="order-items">
-            ${cart.map(item => `
-              <div class="order-item">
-                <span>${item.name} x${item.qty}</span>
-                <span>$${(item.price * item.qty).toFixed(2)}</span>
-              </div>
-            `).join('')}
-          </div>
-          <div class="order-total">
-            <strong>Total: $${cart.reduce((sum, item) => sum + item.price * item.qty, 0).toFixed(2)}</strong>
-          </div>
-        </div>
-        
-        <div class="form-actions">
-          <button type="button" class="back-btn" onclick="showCart()">
-            <span>↩️</span> Retour au panier
-          </button>
-          <button type="submit" class="submit-order-btn">
-            <span>💳</span> Confirmer la commande
-          </button>
-        </div>
-      </form>
-    </div>
-  `;
-
-  // Listener pour soumettre la commande
-  document.getElementById('orderForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const orderData = {
-      firstName: formData.get('firstName'),
-      lastName: formData.get('lastName'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      address: formData.get('address'),
-      city: formData.get('city'),
-      paymentMethod: formData.get('paymentMethod')
-    };
-    
-    // Sauvegarder la commande dans localStorage
-    const orderId = saveOrder(orderData);
-    
-    // Vider le panier
+  
+  // Listener pour commander
+  document.querySelector('.order-btn').addEventListener('click', () => {
     cart = [];
     saveCart();
     updateCartCount();
-    
-    // Afficher la confirmation
-    showOrderConfirmation(orderId);
-  });
-}
-
-// Fonction pour afficher la confirmation de commande
-function showOrderConfirmation(orderId) {
-  const main = document.getElementById("main-content");
-  main.innerHTML = `
-    <div class="order-success">
-      <div class="success-icon">✅</div>
-      <h2>Merci pour votre commande !</h2>
-      <p>Votre commande a été prise en compte et sera traitée rapidement.</p>
-      <p class="order-number">Numéro de commande: #${orderId}</p>
-      <div class="order-details">
-        <p>Vous recevrez un email de confirmation avec les détails de votre commande.</p>
-        <p>Notre équipe vous contactera bientôt pour confirmer la livraison.</p>
+    main.innerHTML = `
+      <div class="order-success">
+        <div class="success-icon">✅</div>
+        <h2>Merci pour votre commande !</h2>
+        <p>Votre commande a été prise en compte et sera traitée rapidement.</p>
+        <p class="order-number">Numéro de commande: #${Math.floor(Math.random() * 1000000)}</p>
+        <button class='back-btn' onclick="showProducts(0)">
+          <span class='back-icon'>↩️</span> Retour à la boutique
+        </button>
       </div>
-      <button class='back-btn' onclick="showHome()">
-        <span class='back-icon'>🏠</span> Retour à l'accueil
-      </button>
-    </div>
-  `;
+    `;
+  });
 }
 
 // =====================
@@ -700,62 +567,12 @@ document.getElementById('cart-count').addEventListener('click', function(e) {
   showCart();
 });
 
-// Logo = retour accueil (affiche la page d'accueil)
+// Logo = retour accueil (affiche tous les produits)
 document.querySelector('.logo-img').addEventListener('click', function() {
   renderMainNav('home');
-  hideCategoriesNav();
-  showHome();
+  renderCategoriesNav(0);
+  showProducts(0);
 });
-
-// Texte du logo aussi cliquable
-document.querySelector('.logo-text').addEventListener('click', function() {
-  renderMainNav('home');
-  hideCategoriesNav();
-  showHome();
-});
-
-// =====================
-// Gestion du localStorage pour les commandes et contacts
-// =====================
-
-// Fonction pour sauvegarder une commande
-function saveOrder(orderDetails) {
-  let orders = JSON.parse(localStorage.getItem('orders') || '[]');
-  const order = {
-    id: Date.now(),
-    date: new Date().toISOString(),
-    items: [...cart],
-    total: cart.reduce((sum, item) => sum + item.price * item.qty, 0),
-    status: 'En attente',
-    ...orderDetails
-  };
-  orders.push(order);
-  localStorage.setItem('orders', JSON.stringify(orders));
-  return order.id;
-}
-
-// Fonction pour sauvegarder un message de contact
-function saveContactMessage(contactData) {
-  let messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
-  const message = {
-    id: Date.now(),
-    date: new Date().toISOString(),
-    ...contactData
-  };
-  messages.push(message);
-  localStorage.setItem('contactMessages', JSON.stringify(messages));
-  return message.id;
-}
-
-// Fonction pour récupérer toutes les commandes
-function getOrders() {
-  return JSON.parse(localStorage.getItem('orders') || '[]');
-}
-
-// Fonction pour récupérer tous les messages de contact
-function getContactMessages() {
-  return JSON.parse(localStorage.getItem('contactMessages') || '[]');
-}
 
 // =====================
 // Initialisation au chargement
